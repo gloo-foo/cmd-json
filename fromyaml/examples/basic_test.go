@@ -1,0 +1,18 @@
+package fromyaml_test
+
+import (
+	"fmt"
+
+	"github.com/gloo-foo/cmd-json/fromyaml"
+	"github.com/gloo-foo/testable"
+)
+
+func ExampleFromYaml() {
+	in := "title: YAML Example\nowner:\n  name: Alice\n  age: 30\n"
+	lines, _ := testable.TestLines(fromyaml.FromYaml(), in)
+	for _, line := range lines {
+		fmt.Println(line)
+	}
+	// Output:
+	// {"owner":{"age":30,"name":"Alice"},"title":"YAML Example"}
+}
