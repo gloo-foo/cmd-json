@@ -1,7 +1,7 @@
 package fromcsv
 
 type (
-	FromCSVDelimiter  rune
+	Delimiter         rune
 	fromCSVNoHeader   bool
 	fromCSVTrimSpaces bool
 )
@@ -19,6 +19,6 @@ type flags struct {
 	trimSpaces fromCSVTrimSpaces
 }
 
-func (d FromCSVDelimiter) Configure(f *flags)  { f.delimiter = rune(d) }
+func (d Delimiter) Configure(f *flags)         { f.delimiter = rune(d) }
 func (n fromCSVNoHeader) Configure(f *flags)   { f.noHeader = n }
 func (t fromCSVTrimSpaces) Configure(f *flags) { f.trimSpaces = t }

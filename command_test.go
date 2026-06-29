@@ -4,12 +4,13 @@ import (
 	"fmt"
 	"testing"
 
-	command "github.com/gloo-foo/cmd-json"
 	"github.com/gloo-foo/testable"
+
+	command "github.com/gloo-foo/cmd-json"
 )
 
 func TestJson_Passthrough(t *testing.T) {
-	lines, err := testable.TestLines(command.Json(), `{"name":"alice","age":30}`+"\n")
+	lines, err := testable.TestLines(command.JSON(), `{"name":"alice","age":30}`+"\n")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -25,7 +26,7 @@ func TestJson_Passthrough(t *testing.T) {
 
 func TestJson_MultipleLines(t *testing.T) {
 	input := `{"a":1}` + "\n" + `{"b":2}` + "\n"
-	lines, err := testable.TestLines(command.Json(), input)
+	lines, err := testable.TestLines(command.JSON(), input)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -41,7 +42,7 @@ func TestJson_MultipleLines(t *testing.T) {
 }
 
 func TestJson_EmptyInput(t *testing.T) {
-	lines, err := testable.TestLines(command.Json(), "")
+	lines, err := testable.TestLines(command.JSON(), "")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -52,7 +53,7 @@ func TestJson_EmptyInput(t *testing.T) {
 
 func TestJson_CompactsWhitespace(t *testing.T) {
 	input := `{ "key" : "value" , "num" : 42 }` + "\n"
-	lines, err := testable.TestLines(command.Json(), input)
+	lines, err := testable.TestLines(command.JSON(), input)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -67,7 +68,7 @@ func TestJson_CompactsWhitespace(t *testing.T) {
 
 func TestJson_Array(t *testing.T) {
 	input := `[1,2,3]` + "\n"
-	lines, err := testable.TestLines(command.Json(), input)
+	lines, err := testable.TestLines(command.JSON(), input)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -78,7 +79,7 @@ func TestJson_Array(t *testing.T) {
 
 func TestJson_Scalar(t *testing.T) {
 	input := `"hello"` + "\n"
-	lines, err := testable.TestLines(command.Json(), input)
+	lines, err := testable.TestLines(command.JSON(), input)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -88,14 +89,14 @@ func TestJson_Scalar(t *testing.T) {
 }
 
 func TestJson_InvalidJSON(t *testing.T) {
-	_, err := testable.TestLines(command.Json(), "not json\n")
+	_, err := testable.TestLines(command.JSON(), "not json\n")
 	if err == nil {
 		t.Fatal("expected error for invalid JSON, got nil")
 	}
 }
 
-func ExampleJson() {
-	lines, _ := testable.TestLines(command.Json(), `{"b":2,"a":1}`+"\n")
+func ExampleJSON() {
+	lines, _ := testable.TestLines(command.JSON(), `{"b":2,"a":1}`+"\n")
 	for _, line := range lines {
 		fmt.Println(line)
 	}

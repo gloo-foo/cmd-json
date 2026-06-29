@@ -8,7 +8,7 @@ import (
 	"github.com/gloo-foo/framework/patterns"
 )
 
-// errInvalidJSON prefixes a parse failure on a single Json input line.
+// errInvalidJSON prefixes a parse failure on a single JSON input line.
 const errInvalidJSON Error = "json: invalid JSON"
 
 // compact parses one line as JSON and re-emits it in compact, key-sorted form.
@@ -20,9 +20,9 @@ func compact(line []byte) ([]byte, error) {
 	return encodeValue(v)
 }
 
-// Json returns a command that parses each input line as JSON and re-emits it
+// JSON returns a command that parses each input line as JSON and re-emits it
 // in compact form. Each input line must be valid JSON.
-func Json(opts ...any) gloo.Command[[]byte, []byte] {
+func JSON(opts ...any) gloo.Command[[]byte, []byte] {
 	_ = gloo.NewParameters[gloo.File, flags](opts...).Flags
 	return patterns.Map(compact)
 }

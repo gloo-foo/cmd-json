@@ -31,7 +31,7 @@ var marshal = json.Marshal
 // each row becomes one compact JSON object keyed by the column headers.
 //
 // Flags:
-//   - FromCSVDelimiter(r): field delimiter (default ',')
+//   - Delimiter(r): field delimiter (default ',')
 //   - FromCSVWithoutHeader: treat every row as data and synthesize col1, col2…
 //   - FromCSVTrim: trim leading whitespace in each field
 //

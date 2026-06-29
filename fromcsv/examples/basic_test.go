@@ -3,8 +3,9 @@ package fromcsv_test
 import (
 	"fmt"
 
-	"github.com/gloo-foo/cmd-json/fromcsv"
 	"github.com/gloo-foo/testable"
+
+	"github.com/gloo-foo/cmd-json/fromcsv"
 )
 
 func ExampleFromCsv() {
@@ -32,7 +33,7 @@ func ExampleFromCsv_noHeader() {
 
 func ExampleFromCsv_customDelimiter() {
 	in := "name|age|city\nAlice|30|NYC\nBob|25|LA\n"
-	lines, _ := testable.TestLines(fromcsv.FromCsv(fromcsv.FromCSVDelimiter('|')), in)
+	lines, _ := testable.TestLines(fromcsv.FromCsv(fromcsv.Delimiter('|')), in)
 	for _, line := range lines {
 		fmt.Println(line)
 	}

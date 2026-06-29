@@ -1,8 +1,9 @@
 package pluck
 
 import (
-	jsoncmd "github.com/gloo-foo/cmd-json"
 	gloo "github.com/gloo-foo/framework"
+
+	jsoncmd "github.com/gloo-foo/cmd-json"
 )
 
 // pluckFields copies the named fields that exist in obj into a fresh object.

@@ -3,8 +3,9 @@ package fromyaml_test
 import (
 	"testing"
 
-	"github.com/gloo-foo/cmd-json/fromyaml"
 	"github.com/gloo-foo/testable"
+
+	"github.com/gloo-foo/cmd-json/fromyaml"
 )
 
 func TestFromYaml_Object(t *testing.T) {

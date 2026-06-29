@@ -21,13 +21,13 @@ func withFailingMarshal(t *testing.T) {
 }
 
 // The marshal error branches are unreachable with the default encoder: values
-// re-emitted by Json, Process, and Decode all originate from a successful
+// re-emitted by JSON, Process, and Decode all originate from a successful
 // json.Unmarshal and so always marshal cleanly. Injecting a failing encoder is
 // the only honest way to exercise these branches.
 
 func TestJson_MarshalError(t *testing.T) {
 	withFailingMarshal(t)
-	_, err := testable.TestLines(Json(), `{"a":1}`+"\n")
+	_, err := testable.TestLines(JSON(), `{"a":1}`+"\n")
 	if !errors.Is(err, errMarshal) {
 		t.Fatalf("got %v, want errMarshal", err)
 	}

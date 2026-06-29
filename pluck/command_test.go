@@ -3,10 +3,11 @@ package pluck_test
 import (
 	"testing"
 
-	jsoncmd "github.com/gloo-foo/cmd-json"
-	"github.com/gloo-foo/cmd-json/pluck"
 	gloo "github.com/gloo-foo/framework"
 	"github.com/gloo-foo/testable"
+
+	jsoncmd "github.com/gloo-foo/cmd-json"
+	"github.com/gloo-foo/cmd-json/pluck"
 )
 
 func TestPluck_KeepsNamedFields(t *testing.T) {

@@ -3,8 +3,9 @@ package command_test
 import (
 	"testing"
 
-	command "github.com/gloo-foo/cmd-json"
 	"github.com/gloo-foo/testable"
+
+	command "github.com/gloo-foo/cmd-json"
 )
 
 func TestQuery_FilterMapSortLimit(t *testing.T) {

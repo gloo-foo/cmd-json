@@ -3,8 +3,9 @@ package fromtsv_test
 import (
 	"testing"
 
-	"github.com/gloo-foo/cmd-json/fromtsv"
 	"github.com/gloo-foo/testable"
+
+	"github.com/gloo-foo/cmd-json/fromtsv"
 )
 
 func eq(t *testing.T, got, want []string) {

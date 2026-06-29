@@ -3,8 +3,9 @@ package fromtoml_test
 import (
 	"testing"
 
-	"github.com/gloo-foo/cmd-json/fromtoml"
 	"github.com/gloo-foo/testable"
+
+	"github.com/gloo-foo/cmd-json/fromtoml"
 )
 
 func TestFromToml_Basic(t *testing.T) {

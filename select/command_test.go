@@ -3,10 +3,11 @@ package selectcmd_test
 import (
 	"testing"
 
-	jsoncmd "github.com/gloo-foo/cmd-json"
-	selectcmd "github.com/gloo-foo/cmd-json/select"
 	gloo "github.com/gloo-foo/framework"
 	"github.com/gloo-foo/testable"
+
+	jsoncmd "github.com/gloo-foo/cmd-json"
+	selectcmd "github.com/gloo-foo/cmd-json/select"
 )
 
 func lines(t *testing.T, cmd gloo.Command[[]byte, []byte], in string) []string {

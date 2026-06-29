@@ -5,9 +5,10 @@ import (
 	"strings"
 	"testing"
 
-	command "github.com/gloo-foo/cmd-json"
 	gloo "github.com/gloo-foo/framework"
 	"github.com/gloo-foo/testable"
+
+	command "github.com/gloo-foo/cmd-json"
 )
 
 // errBoom is a stand-in error a test Processor returns to exercise the

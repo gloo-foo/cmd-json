@@ -3,8 +3,9 @@ package fromtsv_test
 import (
 	"fmt"
 
-	"github.com/gloo-foo/cmd-json/fromtsv"
 	"github.com/gloo-foo/testable"
+
+	"github.com/gloo-foo/cmd-json/fromtsv"
 )
 
 func ExampleFromTsv() {

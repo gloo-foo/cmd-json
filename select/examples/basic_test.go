@@ -3,8 +3,9 @@ package selectcmd_test
 import (
 	"fmt"
 
-	selectcmd "github.com/gloo-foo/cmd-json/select"
 	"github.com/gloo-foo/testable"
+
+	selectcmd "github.com/gloo-foo/cmd-json/select"
 )
 
 func ExampleSelect_hasField() {

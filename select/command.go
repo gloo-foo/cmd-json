@@ -1,8 +1,9 @@
 package selectcmd
 
 import (
-	jsoncmd "github.com/gloo-foo/cmd-json"
 	gloo "github.com/gloo-foo/framework"
+
+	jsoncmd "github.com/gloo-foo/cmd-json"
 )
 
 // Condition reports whether a decoded JSON value should be selected.

@@ -3,8 +3,9 @@ package pluck_test
 import (
 	"fmt"
 
-	"github.com/gloo-foo/cmd-json/pluck"
 	"github.com/gloo-foo/testable"
+
+	"github.com/gloo-foo/cmd-json/pluck"
 )
 
 func ExamplePluck() {
