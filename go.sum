@@ -5,10 +5,12 @@ github.com/antlr4-go/antlr/v4 v4.13.1/go.mod h1:GKmUxMtwp6ZgGwZSva4eWPC5mS6vUAmO
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/destel/rill v0.8.1 h1:tJTit7kljOy2i2kqP4zHG1dUA452VpMK/myYRy5SY28=
 github.com/destel/rill v0.8.1/go.mod h1:srKuXzvGqINUEGYR5b/iwvW+L9/S35RxVHWGYbXNoO4=
+github.com/gloo-foo/fn v0.1.0 h1:/cPr8qyDrD0MnFlIqQ5UfkzGYElKOzbTsTTiVhM+JVA=
+github.com/gloo-foo/fn v0.1.0/go.mod h1:dw6pnp/5XkwONwoLn/C8z2Vh288YfM58HHzpXBAOxtY=
 github.com/gloo-foo/framework v0.1.0 h1:cCFe0tbxIAlErl4fvW0RJZ3ogUGBSH4xUOKc0if87+Y=
 github.com/gloo-foo/framework v0.1.0/go.mod h1:r8TPoqGh+8WuoL+psZScv49zNtI0qc49kWbg7E/gO8k=
-github.com/gloo-foo/testable v0.1.0 h1:hMhgqPbALsb1JMbVpXMyjxulRFOP60y2c3v5RiweAIM=
-github.com/gloo-foo/testable v0.1.0/go.mod h1:+e88aL6kEx0vwFrHJwt24JUJIBI2GZoUa9OlyDbfu48=
+github.com/gloo-foo/testable v0.1.3 h1:CpiGrubB51QynbvUwDzCt2WKPOaL7TW9/UI3CflDWkM=
+github.com/gloo-foo/testable v0.1.3/go.mod h1:uMv8wXFrpJ+X7eyYgWCniYoJvUJ7bgz2Wy/YYuabTA8=
 github.com/gomatic/cirql v0.0.0-20260627185838-a9ce9bd0e588 h1:sMdrku60qE1DeVwkKHL5nVFiqbczhDYw295Pgfv0sAU=
 github.com/gomatic/cirql v0.0.0-20260627185838-a9ce9bd0e588/go.mod h1:fviZUBVQpymXztuxYQ7uIbOrlLQsjmJYOjbazJUDj4k=
 github.com/kr/pretty v0.2.1/go.mod h1:ipq/a2n7PKx3OHsz4KJII5eveXtPO4qwEXGdVfWzfnI=
