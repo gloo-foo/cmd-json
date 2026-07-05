@@ -1,6 +1,7 @@
 package command_test
 
 import (
+	"errors"
 	"testing"
 
 	"github.com/gloo-foo/testable"
@@ -56,21 +57,38 @@ func TestQuery_EmptyInput(t *testing.T) {
 	}
 }
 
-func TestQuery_ParseErrorFailsStream(t *testing.T) {
-	if _, err := testable.TestLines(command.Query(`map {`), `{"a":1}`+"\n"); err == nil {
-		t.Fatal("expected an invalid query to fail the stream")
+func TestQuery_FailurePaths(t *testing.T) {
+	tests := []struct {
+		wantErr error
+		name    string
+		query   command.QueryScript
+		input   string
+	}{
+		{
+			name:    "parse error fails the stream",
+			query:   `map {`,
+			input:   `{"a":1}` + "\n",
+			wantErr: command.ErrQuery,
+		},
+		{
+			name:    "decode error propagates",
+			query:   `filter .a`,
+			input:   "not json\n",
+			wantErr: command.ErrDecode,
+		},
+		{
+			name:    "run error (incomparable sort) fails the stream",
+			query:   `sort .n`,
+			input:   `{"n":"x"}` + "\n" + `{"n":1}` + "\n",
+			wantErr: command.ErrQuery,
+		},
 	}
-}
-
-func TestQuery_DecodeErrorFailsStream(t *testing.T) {
-	if _, err := testable.TestLines(command.Query(`filter .a`), "not json\n"); err == nil {
-		t.Fatal("expected decode error to propagate")
-	}
-}
-
-func TestQuery_RunErrorFailsStream(t *testing.T) {
-	in := `{"n":"x"}` + "\n" + `{"n":1}` + "\n"
-	if _, err := testable.TestLines(command.Query(`sort .n`), run.Input(in)); err == nil {
-		t.Fatal("expected an incomparable sort to fail the stream")
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			_, err := testable.TestLines(command.Query(tt.query), run.Input(tt.input))
+			if !errors.Is(err, tt.wantErr) {
+				t.Fatalf("got %v, want %v", err, tt.wantErr)
+			}
+		})
 	}
 }

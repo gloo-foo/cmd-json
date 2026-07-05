@@ -3,7 +3,6 @@ package fromyaml
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 
 	gloo "github.com/gloo-foo/framework"
 	"github.com/gloo-foo/framework/patterns"
@@ -16,11 +15,11 @@ func yamlToJSON(in [][]byte) ([]byte, error) {
 	data := bytes.Join(in, []byte{'\n'})
 	var result any
 	if err := yaml.Unmarshal(data, &result); err != nil {
-		return nil, fmt.Errorf("%w: %w", errYAML, err)
+		return nil, ErrYAML.With(err)
 	}
 	out, err := json.Marshal(result)
 	if err != nil {
-		return nil, fmt.Errorf("%w: %w", errJSON, err)
+		return nil, ErrJSON.With(err)
 	}
 	return out, nil
 }

@@ -5,11 +5,12 @@ import (
 	"testing"
 
 	"github.com/gloo-foo/testable"
+	errs "github.com/gomatic/go-error"
 )
 
 // errMarshalFail is returned by the injected encoder to drive every marshal
 // error path.
-const errMarshalFail Error = "marshal failed"
+const errMarshalFail errs.Const = "marshal failed"
 
 // withFailingMarshal swaps the package marshal function for one that always
 // fails, restoring the original when the test ends.
@@ -28,8 +29,11 @@ func withFailingMarshal(t *testing.T) {
 func TestJson_MarshalError(t *testing.T) {
 	withFailingMarshal(t)
 	_, err := testable.TestLines(JSON(), `{"a":1}`+"\n")
-	if !errors.Is(err, errMarshal) {
-		t.Fatalf("got %v, want errMarshal", err)
+	if !errors.Is(err, ErrMarshal) {
+		t.Fatalf("got %v, want ErrMarshal", err)
+	}
+	if !errors.Is(err, errMarshalFail) {
+		t.Fatalf("got %v, want the injected cause wrapped", err)
 	}
 }
 
@@ -37,15 +41,15 @@ func TestProcess_MarshalError(t *testing.T) {
 	withFailingMarshal(t)
 	keep := func(v Value) (Value, bool, error) { return v, true, nil }
 	_, err := testable.TestLines(Process(keep), `{"a":1}`+"\n")
-	if !errors.Is(err, errMarshal) {
-		t.Fatalf("got %v, want errMarshal", err)
+	if !errors.Is(err, ErrMarshal) {
+		t.Fatalf("got %v, want ErrMarshal", err)
 	}
 }
 
 func TestDecode_MarshalError(t *testing.T) {
 	withFailingMarshal(t)
 	_, err := testable.TestLines(Decode(), `{"a":1}`+"\n")
-	if !errors.Is(err, errMarshal) {
-		t.Fatalf("got %v, want errMarshal", err)
+	if !errors.Is(err, ErrMarshal) {
+		t.Fatalf("got %v, want ErrMarshal", err)
 	}
 }

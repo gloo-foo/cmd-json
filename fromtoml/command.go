@@ -2,23 +2,10 @@ package fromtoml
 
 import (
 	"bytes"
-	"fmt"
 
 	"github.com/BurntSushi/toml"
 	gloo "github.com/gloo-foo/framework"
 	"github.com/gloo-foo/framework/patterns"
-)
-
-// Error is the sentinel error type for the fromtoml package.
-type Error string
-
-func (e Error) Error() string { return string(e) }
-
-const (
-	// errTOML prefixes a TOML decode failure.
-	errTOML Error = "toml"
-	// errJSON prefixes a JSON encoding failure.
-	errJSON Error = "json"
 )
 
 // unmarshal is the TOML decoder. It is a package variable for symmetry with
@@ -31,11 +18,11 @@ func tomlToJSON(in [][]byte) ([]byte, error) {
 	data := bytes.Join(in, []byte{'\n'})
 	result := map[string]any{}
 	if err := unmarshal(data, &result); err != nil {
-		return nil, fmt.Errorf("%w: %w", errTOML, err)
+		return nil, ErrTOML.With(err)
 	}
 	out, err := marshal(result)
 	if err != nil {
-		return nil, fmt.Errorf("%w: %w", errJSON, err)
+		return nil, ErrJSON.With(err)
 	}
 	return out, nil
 }

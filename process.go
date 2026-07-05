@@ -21,12 +21,6 @@ type Value = any
 // stream.
 type Processor func(in Value) (out Value, isKeep bool, err error)
 
-// errInvalidInput prefixes a decode failure on a single Process line.
-const errInvalidInput Error = "json: invalid input"
-
-// errDecode prefixes a streaming decode failure in Decode.
-const errDecode Error = "json: decode"
-
 // processLine decodes one JSON value from line, applies p, and re-encodes the
 // result. A blank line yields no output; a dropped value (keep=false) likewise.
 func processLine(p Processor, line []byte) ([][]byte, error) {
@@ -36,7 +30,7 @@ func processLine(p Processor, line []byte) ([][]byte, error) {
 	}
 	var v Value
 	if err := json.Unmarshal(trimmed, &v); err != nil {
-		return nil, fmt.Errorf("%w %q: %w", errInvalidInput, trimmed, err)
+		return nil, ErrInvalidInput.With(err, fmt.Sprintf("%q", trimmed))
 	}
 	out, keep, err := p(v)
 	if err != nil || !keep {
@@ -74,7 +68,7 @@ func decodeValues(raw []byte) ([]Value, error) {
 			return values, nil
 		}
 		if err != nil {
-			return nil, fmt.Errorf("%w: %w", errDecode, err)
+			return nil, ErrDecode.With(err)
 		}
 		values = append(values, v)
 	}

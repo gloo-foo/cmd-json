@@ -1,6 +1,7 @@
 package command_test
 
 import (
+	"errors"
 	"fmt"
 	"strings"
 	"testing"
@@ -8,13 +9,14 @@ import (
 	gloo "github.com/gloo-foo/framework"
 	"github.com/gloo-foo/testable"
 	"github.com/gloo-foo/testable/run"
+	errs "github.com/gomatic/go-error"
 
 	command "github.com/gloo-foo/cmd-json"
 )
 
 // errBoom is a stand-in error a test Processor returns to exercise the
 // error-propagation path of Process.
-const errBoom command.Error = "boom"
+const errBoom errs.Const = "boom"
 
 // keepAdults keeps objects whose "age" is >= 18, unchanged.
 func keepAdults(v command.Value) (command.Value, bool, error) {
@@ -71,8 +73,9 @@ func TestProcess_SkipsBlankLines(t *testing.T) {
 }
 
 func TestProcess_InvalidJSONErrors(t *testing.T) {
-	if _, err := testable.TestLines(command.Process(keepAdults), "not json\n"); err == nil {
-		t.Fatal("expected error for invalid JSON")
+	_, err := testable.TestLines(command.Process(keepAdults), "not json\n")
+	if !errors.Is(err, command.ErrInvalidInput) {
+		t.Fatalf("got %v, want ErrInvalidInput", err)
 	}
 }
 
@@ -80,14 +83,16 @@ func TestProcess_PropagatesProcessorError(t *testing.T) {
 	boom := func(command.Value) (command.Value, bool, error) {
 		return nil, false, errBoom
 	}
-	if _, err := testable.TestLines(command.Process(boom), `{"a":1}`+"\n"); err == nil {
-		t.Fatal("expected the Processor error to propagate")
+	_, err := testable.TestLines(command.Process(boom), `{"a":1}`+"\n")
+	if !errors.Is(err, errBoom) {
+		t.Fatalf("got %v, want the Processor error to propagate", err)
 	}
 }
 
 func TestDecode_InvalidJSONErrors(t *testing.T) {
-	if _, err := testable.TestLines(command.Decode(), "{not valid\n"); err == nil {
-		t.Fatal("expected error for malformed JSON document")
+	_, err := testable.TestLines(command.Decode(), "{not valid\n")
+	if !errors.Is(err, command.ErrDecode) {
+		t.Fatalf("got %v, want ErrDecode", err)
 	}
 }
 

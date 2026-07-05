@@ -1,13 +1,13 @@
 package fromtsv
 
-// Error is the sentinel error type for the fromtsv package.
-type Error string
+import (
+	errs "github.com/gomatic/go-error"
+)
 
-func (e Error) Error() string { return string(e) }
-
+// The package's error vocabulary: errs.Const sentinels matched with errors.Is.
 const (
-	// errTSV prefixes a TSV parse failure.
-	errTSV Error = "tsv"
-	// errJSON prefixes a JSON encoding failure.
-	errJSON Error = "json"
+	// ErrTSV marks a TSV parse failure.
+	ErrTSV errs.Const = "tsv"
+	// ErrJSON marks a JSON encoding failure.
+	ErrJSON errs.Const = "json"
 )

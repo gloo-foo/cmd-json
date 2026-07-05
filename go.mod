@@ -7,6 +7,7 @@ require (
 	github.com/gloo-foo/framework v0.1.0
 	github.com/gloo-foo/testable v0.1.3
 	github.com/gomatic/cirql v0.0.0-20260627185838-a9ce9bd0e588
+	github.com/gomatic/go-error v0.3.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 

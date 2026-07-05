@@ -45,7 +45,7 @@ func parseRecords(in [][]byte, f flags) ([][]string, error) {
 	r.FieldsPerRecord = -1 // tolerate ragged rows
 	records, err := r.ReadAll()
 	if err != nil {
-		return nil, fmt.Errorf("%w: %w", errCSV, err)
+		return nil, ErrCSV.With(err)
 	}
 	return records, nil
 }
@@ -85,7 +85,7 @@ func recordToJSON(headers, rec []string) ([]byte, error) {
 	}
 	enc, err := marshal(obj)
 	if err != nil {
-		return nil, fmt.Errorf("%w: %w", errJSON, err)
+		return nil, ErrJSON.With(err)
 	}
 	return enc, nil
 }

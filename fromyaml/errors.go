@@ -1,14 +1,14 @@
 package fromyaml
 
-// Error is the sentinel error type for the fromyaml package.
-type Error string
+import (
+	errs "github.com/gomatic/go-error"
+)
 
-func (e Error) Error() string { return string(e) }
-
+// The package's error vocabulary: errs.Const sentinels matched with errors.Is.
 const (
-	// errYAML prefixes a YAML decode failure.
-	errYAML Error = "yaml"
-	// errJSON prefixes a JSON encoding failure (e.g. a YAML mapping with
+	// ErrYAML marks a YAML decode failure.
+	ErrYAML errs.Const = "yaml"
+	// ErrJSON marks a JSON encoding failure (e.g. a YAML mapping with
 	// non-string keys, which JSON cannot represent).
-	errJSON Error = "json"
+	ErrJSON errs.Const = "json"
 )

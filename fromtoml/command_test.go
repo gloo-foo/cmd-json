@@ -1,6 +1,7 @@
 package fromtoml_test
 
 import (
+	"errors"
 	"testing"
 
 	"github.com/gloo-foo/testable"
@@ -42,7 +43,8 @@ func TestFromToml_EmptyInput(t *testing.T) {
 }
 
 func TestFromToml_InvalidErrors(t *testing.T) {
-	if _, err := testable.TestLines(fromtoml.FromToml(), "this is = not = valid toml\n"); err == nil {
-		t.Fatal("expected error for invalid TOML")
+	_, err := testable.TestLines(fromtoml.FromToml(), "this is = not = valid toml\n")
+	if !errors.Is(err, fromtoml.ErrTOML) {
+		t.Fatalf("got %v, want ErrTOML", err)
 	}
 }

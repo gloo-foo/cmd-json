@@ -3,15 +3,11 @@ package command
 import (
 	"bytes"
 	"context"
-	"fmt"
 
 	gloo "github.com/gloo-foo/framework"
 	"github.com/gloo-foo/framework/patterns"
 	"github.com/gomatic/cirql"
 )
-
-// errQuery prefixes a cirql query failure (parse or run).
-const errQuery Error = "json: query"
 
 // QueryScript is the source text of a cirql pipeline query.
 type QueryScript string
@@ -29,7 +25,7 @@ type QueryScript string
 func Query(q QueryScript) gloo.Command[[]byte, []byte] {
 	pipeline, err := cirql.Parse(string(q))
 	if err != nil {
-		return errorCommand(fmt.Errorf("%w: %w", errQuery, err))
+		return errorCommand(ErrQuery.With(err))
 	}
 	return patterns.Accumulate(func(lines [][]byte) ([][]byte, error) {
 		return runQuery(pipeline, lines)
@@ -49,7 +45,7 @@ func runQuery(pipeline cirql.Pipeline, lines [][]byte) ([][]byte, error) {
 	}
 	out, err := pipeline.Run(flatten(values))
 	if err != nil {
-		return nil, fmt.Errorf("%w: %w", errQuery, err)
+		return nil, ErrQuery.With(err)
 	}
 	return encodeValues(out)
 }

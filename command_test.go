@@ -1,6 +1,7 @@
 package command_test
 
 import (
+	"errors"
 	"fmt"
 	"testing"
 
@@ -91,8 +92,8 @@ func TestJson_Scalar(t *testing.T) {
 
 func TestJson_InvalidJSON(t *testing.T) {
 	_, err := testable.TestLines(command.JSON(), "not json\n")
-	if err == nil {
-		t.Fatal("expected error for invalid JSON, got nil")
+	if !errors.Is(err, command.ErrInvalidJSON) {
+		t.Fatalf("got %v, want ErrInvalidJSON", err)
 	}
 }
 
