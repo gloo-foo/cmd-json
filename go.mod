@@ -4,10 +4,10 @@ go 1.26.4
 
 require (
 	github.com/BurntSushi/toml v1.6.0
-	github.com/gloo-foo/framework v0.1.7
-	github.com/gloo-foo/testable v0.1.8
+	github.com/gloo-foo/framework v0.1.9
+	github.com/gloo-foo/testable v0.1.11
 	github.com/gomatic/cirql v0.1.5
-	github.com/gomatic/go-error v0.3.4
+	github.com/gomatic/go-error v0.3.7
 	gopkg.in/yaml.v3 v3.0.1
 )
 
