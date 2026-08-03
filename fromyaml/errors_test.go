@@ -21,7 +21,7 @@ func TestFromYaml_InvalidYAMLErrors(t *testing.T) {
 	}
 }
 
-func TestFromYaml_NonStringKeysErrorOnJSON(t *testing.T) {
+func TestFromYaml_NonStringKeysErrJSON(t *testing.T) {
 	// YAML allows integer mapping keys; JSON does not. Decoding succeeds but
 	// re-encoding to JSON must fail, exercising the json error branch.
 	_, err := testable.TestLines(FromYaml(), "1: a\n2: b\n")
